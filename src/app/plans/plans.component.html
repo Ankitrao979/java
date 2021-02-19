@@ -1,0 +1,29 @@
+<app-spinner *ngIf="isProcessing" [width]="'3rem'" [height]="'3rem'"></app-spinner>
+<main class="container">
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <h1 class="display-4">Pricing</h1>
+        <p class="lead">Step into the future of unlimited broadband plans with fibernet technology. Experience the high-speed internet on our existing Fiber broadband connection in USA across multiple devices.</p>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+        <div class="col" *ngFor="let plan of plansInfo">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-header">
+                    <h4 class="my-0 fw-normal">{{plan.planName}}</h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title">{{plan.price}} <small class="text-muted">/ mo</small></h1>
+                    <hr>
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li>{{plan.speed}}</li><br>
+                        <li>{{plan.speed}}</li><br>
+                        <li>{{plan.postFupSpeed}}</li><br>
+                        <li>Priority email support</li><br>
+                        <li>Help center access</li>
+                    </ul>
+                    <button type="button" class="w-50 btn btn-dark">Register</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

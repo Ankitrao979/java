@@ -1,0 +1,81 @@
+<app-alert [message]="systemMessage.message" [type]="systemMessage.messageType"></app-alert>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+            <h1 class="display-4">Sign Up</h1>
+            <p class="lead">Step into the future of unlimited broadband plans with fibernet technology. Experience the high-speed internet on our existing Fiber broadband connection in USA across multiple devices.</p>
+        </div>
+        <!-- <message-container [message]=""></message-container> -->
+        <ng-container *ngIf="userRegistrationFg">
+            <div class="col">
+                <form (ngSubmit)="registerUser(userRegistrationFg)" [formGroup]="userRegistrationFg">
+                    <div class="row">
+                        <div class="col mb-3">
+                            <label for="firstName">First name</label>
+                            <input type="text" class="form-control" formControlName="firstName">
+                            <div *ngIf="userRegistrationFg.get('firstName').invalid && userRegistrationFg.get('firstName').touched">
+                                <p class="text-danger" *ngIf="userRegistrationFg.get('firstName').errors.required">First Name Required</p>
+                            </div>
+                        </div>
+                        <div class="col mb-3">
+                            <label for="lastName">Last name</label>
+                            <input type="text" class="form-control" formControlName="lastName">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col mb-3">
+                            <label for="firstName">Email</label>
+                            <input type="text" class="form-control" formControlName="emailId">
+                        </div>
+                        <div class="col mb-3">
+                            <label for="userId">userId</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">@</span>
+                                </div>
+                                <input type="text" class="form-control" formControlName="userId">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 offset-0 mb-3">
+                            <label for="firstName">Phone Number</label>
+                            <input type="text" class="form-control" formControlName="phoneNumber">
+                        </div>
+                    </div>
+                    <div>
+                        <div formGroupName="address">
+                            <hr>
+                            <div class="mb-3">
+                                <label for="address">Address</label>
+                                <input type="text" class="form-control" formControlName="addressLane1">
+                            </div>
+                            <div class="mb-3">
+                                <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
+                                <input type="text" class="form-control" formControlName="addressLane1">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5 mb-3">
+                                    <label for="country">City</label>
+                                    <input type="text" class="form-control" formControlName="city">
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="state">State</label>
+                                    <input type="text" class="form-control" formControlName="state">
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="zip">Zip</label>
+                                    <input type="text" class="form-control" formControlName="zipCode">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4 offset-4 mt-3">
+                        <button type="submit" class="w-100 btn btn-dark">Register</button>
+                    </div>
+                </form>
+            </div>
+        </ng-container>
+    </div>
+</div>

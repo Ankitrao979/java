@@ -1,0 +1,308 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 order-md-1" *ngIf="paymentForm">
+
+            <form [formGroup]="paymentForm">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="firstName">First name</label>
+                        <input type="text" class="form-control" (keyup)="log()" formControlName="firstName">
+                        <div *ngIf="paymentForm.get('firstName').invalid && paymentForm.get('firstName').touched">
+                            <p class="text-danger" *ngIf="paymentForm.get('firstName').errors.required">First Name Required</p>
+                            <p class="text-danger" *ngIf="paymentForm.get('firstName').errors.spacesNotAllowed">Spaced Not allowed Name</p>
+                            <p class="text-danger" *ngIf="paymentForm.get('firstName').errors.minlength">Minimum length should be 3</p>
+                            <p class="text-danger" *ngIf="paymentForm.get('firstName').errors.maxlength">Maximum 6 characters allowed</p>
+                            <p class="text-danger" *ngIf="paymentForm.get('firstName').errors.pattern">Invalid pattern for first name</p>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="lastName">Last name</label>
+                        <input type="text" class="form-control" formControlName="lastName">
+                        <div *ngIf="paymentForm.get('lastName').invalid && paymentForm.get('lastName').touched">
+                            <p class="text-danger" *ngIf="paymentForm.get('lastName').errors.required">Last Name Required</p>
+                            <p class="text-danger" *ngIf="paymentForm.get('lastName').errors.minlength">Minimum length should be 3</p>
+                            <p class="text-danger" *ngIf="paymentForm.get('lastName').errors.maxlength">Maximum 6 characters allowed</p>
+                            <p class="text-danger" *ngIf="paymentForm.get('lastName').errors.pattern">Invalid pattern for Last name</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="username">Username</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">@</span>
+                        </div>
+                        <input type="text" class="form-control" formControlName="userName">
+                    </div>
+                    <div *ngIf="paymentForm.get('userName').invalid && paymentForm.get('userName').touched">
+                        <p class="text-danger" *ngIf="paymentForm.get('userName').errors.required">User Name Required</p>
+                        <p class="text-danger" *ngIf="paymentForm.get('userName').errors.minlength">Minimum length should be 3</p>
+                        <p class="text-danger" *ngIf="paymentForm.get('userName').errors.maxlength">Maximum 6 characters allowed</p>
+                        <p class="text-danger" *ngIf="paymentForm.get('lastName').errors.pattern">Invalid pattern for User name</p>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="email">Email <span class="text-muted">(Optional)</span></label>
+                    <input type="email" class="form-control" formControlName="email">
+                    <div *ngIf="paymentForm.get('email').invalid && paymentForm.get('email').touched">
+                        <p class="text-danger" *ngIf="paymentForm.get('email').errors.pattern"> Please enter valid email address</p>
+                    </div>
+                </div>
+
+                <div *ngIf="paymentForm.get('billingAddress')">
+                    <div formGroupName="billingAddress">
+                        <hr>
+                        <h4 class="mb-3 mt-5">Billing address</h4>
+
+                        <div class="mb-3">
+                            <label for="address">Address</label>
+                            <input type="text" class="form-control" formControlName="addressLane1">
+                            <div *ngIf="paymentForm.get('billingAddress.addressLane1').invalid && paymentForm.get('billingAddress').get('addressLane1').touched">
+                                <p class="text-danger" *ngIf="paymentForm.get('billingAddress').get('addressLane1').errors.required">Address Required</p>
+                                <p class="text-danger" *ngIf="paymentForm.get('billingAddress').get('addressLane1').errors.minlength">Minimum length should be 3</p>
+                                <p class="text-danger" *ngIf="paymentForm.get('billingAddress').get('addressLane1').errors.maxlength">Maximum 6 characters allowed</p>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
+                            <input type="text" class="form-control">
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-5 mb-3">
+                                <label for="country">Country</label>
+                                <select class="custom-select d-block w-100">
+                                 <option value="">Choose...</option>
+                                 <option>United States</option>
+                         </select>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="state">State</label>
+                                <select class="custom-select d-block w-100">
+                             <option value="">Choose...</option>
+                             <option>California</option>
+                        </select>
+                                <div class="invalid-feedback">
+                                    Please provide a valid state.
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="zip">Zip</label>
+                                <input type="text" class="form-control" formControlName="zip">
+                                <div *ngIf="paymentForm.get('billingAddress').get('zip').invalid && paymentForm.get('billingAddress').get('zip').touched">
+                                    <p class="text-danger" *ngIf="paymentForm.get('billingAddress').get('zip').errors.required">zip Required</p>
+                                    <p class="text-danger" *ngIf="paymentForm.get('billingAddress').get('zip').errors.minlength">Minimum length should be 5</p>
+                                    <p class="text-danger" *ngIf="paymentForm.get('billingAddress').get('zip').errors.maxlength">Maximum 6 characters allowed</p>
+                                    <p class="text-danger" *ngIf="paymentForm.get('billingAddress').get('zip').errors.pattern">Invalid pattern for zip</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="custom-control custom-checkbox" (change)="toggledBilling()">
+                    <input type="checkbox" class="custom-control-input" id="same-address">
+                    <label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>
+                </div>
+
+
+                <div *ngIf="isBillingAddress" formGroupName="mailingAddress">
+                    <hr>
+                    <h4 class="mb-3 mt-5">Mailing address</h4>
+                    <div class="mb-3">
+                        <label for="address">Address</label>
+                        <input type="text" class="form-control" formControlName="addressLane1">
+                        <div *ngIf="paymentForm.get('mailingAddress').get('addressLane1').invalid && paymentForm.get('mailingAddress').get('addressLane1').touched">
+                            <p class="text-danger" *ngIf="paymentForm.get('mailingAddress').get('addressLane1').errors.required">Address Required</p>
+                            <p class="text-danger" *ngIf="paymentForm.get('mailingAddress').get('addressLane1').errors.minlength">Minimum length should be 3</p>
+                            <p class="text-danger" *ngIf="paymentForm.get('mailingAddress').get('addressLane1').errors.maxlength">Maximum 6 characters allowed</p>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
+                        <input type="text" class="form-control" formControlName="addressLane1" placeholder="Apartment or suite">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-5 mb-3">
+                            <label for="country">City</label>
+                            <input type="text" class="form-control" formControlName="city">
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="state">State</label>
+                            <select formControlName="state" class="custom-select d-block w-100">
+                                <option value="">Choose...</option>
+                                <option>California</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please provide a valid state.
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="zip">Zip</label>
+                            <input type="text" class="form-control" formControlName="zip">
+                            <div *ngIf="paymentForm.get('mailingAddress').get('zip').invalid && paymentForm.get('mailingAddress').get('zip').touched">
+                                <p class="text-danger" *ngIf="paymentForm.get('mailingAddress').get('zip').errors.required">zip Required</p>
+                                <p class="text-danger" *ngIf="paymentForm.get('mailingAddress').get('zip').errors.minlength">Minimum length should be 5</p>
+                                <p class="text-danger" *ngIf="paymentForm.get('mailingAddress').get('zip').errors.maxlength">Maximum 6 characters allowed</p>
+                                <p class="text-danger" *ngIf="paymentForm.get('mailingAddress').get('zip').errors.pattern">Invalid pattern for zip</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <hr class="mb-4">
+
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="save-info">
+                    <label class="custom-control-label" for="save-info">Save this information for next time</label>
+                </div>
+                <hr class="mb-4">
+
+                <h4 class="mb-3">Payment</h4>
+                <div class="d-block my-3">
+                    <div class="custom-control custom-radio" (change)="toggledPayments('cc')">
+                        <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked="" required="">
+                        <label class="custom-control-label" for="credit">Credit card / Debit Card</label>
+                    </div>
+                    <div class="custom-control custom-radio" (change)="toggledPayments('bank')">
+                        <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required="">
+                        <label class="custom-control-label" for="debit">Bank Account</label>
+                    </div>
+                    <div class="custom-control custom-radio" (change)="toggledPayments('paypal')">
+                        <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required="">
+                        <label class="custom-control-label" for="paypal">Paypal</label>
+                    </div>
+                </div>
+
+
+                <div *ngIf="paymentForm.get('bankPayment')">
+                    <div class="row" *ngIf="selectPayment=='bank'" formGroupName="bankPayment">
+                        <div class="col-md-6 mb-3">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" formControlName="name">
+                            <small class="text-muted">Full name</small>
+                            <div *ngIf="paymentForm.get('bankPayment').get('name').invalid && paymentForm.get('bankPayment').get('name').touched">
+                                <p class="text-danger" *ngIf="paymentForm.get('bankPayment').get('name').errors.required">Required</p>
+                                <p class="text-danger" *ngIf="paymentForm.get('bankPayment').get('name').errors.minlength">Minimum length should be 5</p>
+                                <p class="text-danger" *ngIf="paymentForm.get('bankPayment').get('name').errors.maxlength">Maximum 6 characters allowed</p>
+                                <!-- <p class="text-danger" *ngIf="paymentForm.get('bankPayment').get('name').errors.pattern">Invalid pattern for zip</p> -->
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="accoutnumber">Account Number</label>
+                            <input type="text" class="form-control" formControlName="accoutNumber">
+                            <div *ngIf="paymentForm.get('bankPayment').get('accoutNumber').invalid && paymentForm.get('bankPayment').get('accoutNumber').touched">
+                                <p class="text-danger" *ngIf="paymentForm.get('bankPayment').get('accoutNumber').errors.required">accoutNumber Required</p>
+                                <p class="text-danger" *ngIf="paymentForm.get('bankPayment').get('accoutNumber').errors.minlength">Minimum length should be 5</p>
+                                <p class="text-danger" *ngIf="paymentForm.get('bankPayment').get('accoutNumber').errors.maxlength">Maximum 6 characters allowed</p>
+                                <!-- <p class="text-danger" *ngIf="paymentForm.get('bankPayment').get('accoutNumber').errors.pattern">Invalid pattern for zip</p> -->
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="Routing Number">Routing Number</label>
+                            <input type="text" class="form-control" formControlName="routingNumber">
+                            <div *ngIf="paymentForm.get('bankPayment').get('routingNumber').invalid && paymentForm.get('bankPayment').get('routingNumber').touched">
+                                <p class="text-danger" *ngIf="paymentForm.get('bankPayment').get('routingNumber').errors.required">routingNumber Required</p>
+                                <p class="text-danger" *ngIf="paymentForm.get('bankPayment').get('routingNumber').errors.minlength">Minimum length should be 5</p>
+                                <p class="text-danger" *ngIf="paymentForm.get('bankPayment').get('routingNumber').errors.maxlength">Maximum 6 characters allowed</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div *ngIf="paymentForm.get('cardPayment')">
+                    <div class="row" *ngIf="selectPayment=='cc'" formGroupName="cardPayment">
+                        <div class="col-md-6 mb-3">
+                            <label for="cc-name">Name on card</label>
+                            <input type="text" class="form-control" formControlName="name">
+                            <small class="text-muted">Full name as displayed on card</small>
+                            <div *ngIf="paymentForm.get('cardPayment').get('name').invalid && paymentForm.get('cardPayment').get('name').touched">
+                                <p class="text-danger" *ngIf="paymentForm.get('cardPayment').get('name').errors.required">routingNumber Required</p>
+                                <p class="text-danger" *ngIf="paymentForm.get('cardPayment').get('name').errors.minlength">Minimum length should be 5</p>
+                                <p class="text-danger" *ngIf="paymentForm.get('cardPayment').get('name').errors.maxlength">Maximum 6 characters allowed</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="cc-number">Card number</label>
+                            <input type="text" class="form-control" formControlName="cardNumber">
+                            <div *ngIf="paymentForm.get('cardPayment').get('cardNumber').invalid && paymentForm.get('cardPayment').get('cardNumber').touched">
+                                <p class="text-danger" *ngIf="paymentForm.get('cardPayment').get('cardNumber').errors.required">cardNumber Required</p>
+                                <p class="text-danger" *ngIf="paymentForm.get('cardPayment').get('cardNumber').errors.minlength">Enter valid card number</p>
+                                <p class="text-danger" *ngIf="paymentForm.get('cardPayment').get('cardNumber').errors.maxlength">Enter valid card number</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="cc-expiration">Expiration</label>
+                            <input type="text" class="form-control" formControlName="expiration">
+                            <div *ngIf="paymentForm.get('cardPayment').get('expiration').invalid && paymentForm.get('cardPayment').get('expiration').touched">
+                                <p class="text-danger" *ngIf="paymentForm.get('cardPayment').get('expiration').errors.required">expiration Required</p>
+                                <p class="text-danger" *ngIf="paymentForm.get('cardPayment').get('expiration').errors.minlength">Enter valid card number</p>
+                                <p class="text-danger" *ngIf="paymentForm.get('cardPayment').get('expiration').errors.maxlength">Enter valid card number</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="cvv">CVV</label>
+                            <input class="form-control" type="text" (keyup)="log()" formControlName="cvv">
+                            <div *ngIf="paymentForm.get('cardPayment').get('cvv').invalid && paymentForm.get('cardPayment').get('cvv').touched">
+                                <p class="text-danger" *ngIf="paymentForm.get('cardPayment').get('cvv').errors.required">cvv Required</p>
+                                <p class="text-danger" *ngIf="paymentForm.get('cardPayment').get('cvv').errors.minlength">Enter valid cvv</p>
+                                <p class="text-danger" *ngIf="paymentForm.get('cardPayment').get('cvv').errors.maxlength">Enter valid cvv</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div *ngIf="paymentForm.get('paypalPayment')">
+                    <div class="row" *ngIf="selectPayment=='paypal'" formGroupName="paypalPayment">
+                        <div class="col-md-6 mb-3">
+                            <label for="cc-name">User Name</label>
+                            <input type="text" class="form-control" formControlName="userName">
+                            <small class="text-muted">User Name</small>
+                            <div *ngIf="paymentForm.get('paypalPayment').get('userName').invalid && paymentForm.get('paypalPayment').get('userName').touched">
+                                <p class="text-danger" *ngIf="paymentForm.get('paypalPayment').get('userName').errors.required">userName Required</p>
+                                <p class="text-danger" *ngIf="paymentForm.get('paypalPayment').get('userName').errors.minlength">Minimum length should be 5</p>
+                                <p class="text-danger" *ngIf="paymentForm.get('paypalPayment').get('userName').errors.maxlength">Maximum 6 characters allowed</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="cc-number">Mobile number</label>
+                            <input type="text" class="form-control" formControlName="mobileNumber">
+                            <div *ngIf="paymentForm.get('paypalPayment').get('mobileNumber').invalid && paymentForm.get('paypalPayment').get('mobileNumber').touched">
+                                <p class="text-danger" *ngIf="paymentForm.get('paypalPayment').get('mobileNumber').errors.required">mobileNumber Required</p>
+                                <p class="text-danger" *ngIf="paymentForm.get('paypalPayment').get('mobileNumber').errors.minlength">Minimum length should be 10</p>
+                                <p class="text-danger" *ngIf="paymentForm.get('paypalPayment').get('mobileNumber').errors.maxlength">Maximum 10 characters allowed</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="cc-expiration">Password</label>
+                            <input type="text" class="form-control" formControlName="password">
+                            <div *ngIf="paymentForm.get('paypalPayment').get('password').invalid && paymentForm.get('paypalPayment').get('password').touched">
+                                <p class="text-danger" *ngIf="paymentForm.get('paypalPayment').get('password').errors.required">password Required</p>
+                                <p class="text-danger" *ngIf="paymentForm.get('paypalPayment').get('password').errors.minlength">Minimum length should be 6</p>
+                                <p class="text-danger" *ngIf="paymentForm.get('paypalPayment').get('password').errors.maxlength">Maximum 16 characters allowed</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr>
+                <button type="submit" class="w-100 btn btn-dark" [disabled]="!isButtonEnables()">Submit</button>
+                <br>
+                <br>{{paymentForm.value | json }}
+            </form>
+        </div>
+    </div>
+</div>

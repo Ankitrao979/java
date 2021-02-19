@@ -1,0 +1,49 @@
+<div class="container">
+    <div class="row mt-5 mb-5">
+        <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+            <h1 class="display-4">Conatct us</h1>
+            <p class="lead">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, adipisci esse, quia rerum molestiae corrupti, in minus ea autem ut dolorum. Assumenda, cumque alias eveniet ipsam perspiciatis ad id blanditiis?</p>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="firstName">First name</label>
+            <input type="text" class="form-control" placeholder="First name" required minlength="3" maxlength="20" pattern="[A-Za-z]+" ngModel name="firstName" #firstName="ngModel">
+            <div *ngIf="firstName.invalid && firstName.touched">
+                <p *ngIf="firstName.errors.required" class="text-danger">First name is required</p>
+                <p *ngIf="firstName.errors.minlength" class="text-danger">Minimum 3 charracters required</p>
+                <p *ngIf="firstName.errors.pattern" class="text-danger">Invalid pattern for first name</p>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="lastName">Last name</label>
+            <input required maxlength="11" pattern="[A-Za-z]+" ngModel name="lastName" #lastName="ngModel" type="text" class="form-control">
+            <div *ngIf="lastName.invalid && lastName.touched">
+                <p *ngIf="lastName.errors.required" class="text-danger">Last name is required</p>
+                <p *ngIf="lastName.errors.pattern" class="text-danger">Invalid pattern for first name</p>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="firstName">Phone Number</label>
+            <input type="text" class="form-control" placeholder="First name" required minlength="3" maxlength="20" pattern="[A-Za-z]+" ngModel name="firstName" #firstName="ngModel">
+            <div *ngIf="firstName.invalid && firstName.touched">
+                <p *ngIf="firstName.errors.required" class="text-danger">First name is required</p>
+                <p *ngIf="firstName.errors.minlength" class="text-danger">Minimum 3 charracters required</p>
+                <p *ngIf="firstName.errors.pattern" class="text-danger">Invalid pattern for first name</p>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="lastName">Email Id</label>
+            <input required maxlength="11" pattern="[A-Za-z]+" ngModel name="lastName" #lastName="ngModel" type="text" class="form-control">
+            <div *ngIf="lastName.invalid && lastName.touched">
+                <p *ngIf="lastName.errors.required" class="text-danger">Last name is required</p>
+                <p *ngIf="lastName.errors.pattern" class="text-danger">Invalid pattern for first name</p>
+            </div>
+        </div>
+        <div class="col form-group">
+            <label for="exampleFormControlTextarea1">Detailed Enquiry</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+    </div>
+    <div class="offset-4">
+        <button type="button" class="w-50 btn btn-dark">Submit</button>
+    </div>
+</div>
